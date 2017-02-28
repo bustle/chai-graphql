@@ -28,7 +28,7 @@ in your spec.js
 ```js
 var request = {
   data: {
-    foo: 'bar
+    foo: 'bar'
   }
 }
 
