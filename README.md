@@ -1,78 +1,61 @@
-chai-subset [![npm version](https://badge.fury.io/js/chai-subset.svg)](https://badge.fury.io/js/chai-subset) [![Build Status](https://travis-ci.org/debitoor/chai-subset.svg?branch=master)](https://travis-ci.org/debitoor/chai-subset) [![devDependency Status](https://david-dm.org/debitoor/chai-subset/dev-status.svg)](https://david-dm.org/debitoor/chai-subset#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/debitoor/chai-subset/badge.svg?service=github)](https://coveralls.io/github/debitoor/chai-subset) [![NSP Status](https://nodesecurity.io/orgs/debitoor/projects/eb6fec04-2b26-4462-b4ff-08d952da3065/badge)](https://nodesecurity.io/orgs/debitoor/projects/eb6fec04-2b26-4462-b4ff-08d952da3065)
+chai-graphql
+[![npm version](https://badge.fury.io/js/chai-graphql.svg)](https://badge.fury.io/js/chai-graphql)
+[![Build Status](https://travis-ci.org/bustlelabs/chai-graphql.svg?branch=master)](https://travis-ci.org/bustlelabs/chai-graphql)
+[![devDependency Status](https://david-dm.org/bustlelabs/chai-graphql/dev-status.svg)](https://david-dm.org/bustlelabs/chai-graphql#info=devDependencies)
 ===========
 
-"containSubset" object properties matcher for [Chai](http://chaijs.com/) assertion library
+GraphQL response matcher for Chai [Chai](http://chaijs.com/) assertion library
 
-Installation
-===========
+Works with both parsed JSON responses and local object responses.
 
-`npm install --save-dev chai-subset`
+## Installation
+```
+npm install --save-dev chai-graphql
+```
 
-Usage
-=====
+## API
 
-common.js
+
+## Usage
+In your setup
 ```js
-var chai = require('chai');
-var chaiSubset = require('chai-subset');
-chai.use(chaiSubset);
+import chai from 'chai'
+import chaiGraphQL from 'chai-graphql'
+chai.use(chaiGraphQL)
 ```
 
 in your spec.js
 ```js
-var obj = {
-	a: 'b',
-	c: 'd',
-	e: {
-		foo: 'bar',
-		baz: {
-			qux: 'quux'
-		}
-	}
-};
-	
-expect(obj).to.containSubset({
-	a: 'b',
-	e: {
-		baz: {
-			qux: 'quux'
-		}
-	}
-});
-//or with 'not'
-expect(obj).to.not.containSubset({
-	g: 'whatever'
-});
-```
+var request = {
+  data: {
+    foo: 'bar
+  }
+}
 
-Also works good with arrays and `should` interface
-```js
-var list = [{a: 'a', b: 'b'}, {v: 'f', d: {z: 'g'}}];
+// Passes
+assert.graphQL(request, { foo: 'bar' })
+expect(request).to.be.graphQl({ foo: 'bar' })
 
-list.should.containSubset([{a:'a'}]); //Assertion error is not thrown
-list.should.containSubset([{a:'a',  b: 'b'}]); //Assertion error is not thrown
+// Fails
+assert.graphQLError(request)
+expect(request).to.be.graphQLError()
 
-list.should.containSubset([{a:'a', b: 'bd'}]); 
-/*throws
-AssertionError: expected
-[
+const badResponse = {
+  errors: [
     {
-        "a": "a",
-        "b": "b"
+      message: 'Error message',
+      stack: 'Prints if present'
     },
-    {
-        "v": "f",
-        "d": {
-            "z": "g"
-        }
-    }
-]
-to contain subset 
-[ { a: 'a', b: 'bd' } ]
-*/
-```
+    new GraphQLError('GraphQL Error Object'),
+    new Error('Regular Error')
+  ]
+}
 
-and with `assert` interface
-```js
-assert.containSubset({a: 1, b: 2}, {a: 1});
+// Passes
+assert.graphQLError(badResponse)
+expect(badResponse).to.be.graphQLError()
+
+// fails
+assert.graphQL(badResponse, { foo: 'bar' })
+expect(badResponse).to.be.graphQl({ foo: 'bar' })
 ```
