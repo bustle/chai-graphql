@@ -1,10 +1,7 @@
-chai-graphql
-[![npm version](https://badge.fury.io/js/chai-graphql.svg)](https://badge.fury.io/js/chai-graphql)
-[![Build Status](https://travis-ci.org/bustlelabs/chai-graphql.svg?branch=master)](https://travis-ci.org/bustlelabs/chai-graphql)
-[![devDependency Status](https://david-dm.org/bustlelabs/chai-graphql/dev-status.svg)](https://david-dm.org/bustlelabs/chai-graphql#info=devDependencies)
+chai-graphql [![npm version](https://badge.fury.io/js/chai-graphql.svg)](https://badge.fury.io/js/chai-graphql) [![Build Status](https://travis-ci.org/bustlelabs/chai-graphql.svg?branch=master)](https://travis-ci.org/bustlelabs/chai-graphql) [![devDependency Status](https://david-dm.org/bustlelabs/chai-graphql/dev-status.svg)](https://david-dm.org/bustlelabs/chai-graphql#info=devDependencies)
 ===========
 
-GraphQL response matcher for Chai [Chai](http://chaijs.com/) assertion library
+GraphQL response matcher for [Chai](http://chaijs.com/) assertion library
 
 Works with both parsed JSON responses and local object responses.
 
@@ -35,6 +32,7 @@ var request = {
 
 // Passes
 assert.graphQL(request, { foo: 'bar' })
+assert.notGraphQLError(request)
 expect(request).to.be.graphQl({ foo: 'bar' })
 
 // Fails
@@ -58,5 +56,6 @@ expect(badResponse).to.be.graphQLError()
 
 // fails
 assert.graphQL(badResponse, { foo: 'bar' })
+assert.notGraphQLError(badResponse)
 expect(badResponse).to.be.graphQl({ foo: 'bar' })
 ```
