@@ -1,6 +1,10 @@
 language: node_js
 node_js:
-  - stable
+  - 6
   - 4
 sudo: false
-after_success: "npm run coveralls"
+install:
+- npm install
+script:
+- npm run lint
+- npm run test

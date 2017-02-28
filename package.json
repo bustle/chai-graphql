@@ -1,11 +1,11 @@
 {
-  "name": "chai-subset",
-  "version": "1.4.0",
-  "description": "Object properties matcher for Chai",
-  "main": "lib/chai-subset.js",
+  "name": "chai-graphql",
+  "version": "0.0.1",
+  "description": "GraphQL response matcher for Chai",
+  "main": "lib/chai-graphql.js",
   "scripts": {
-    "test": "istanbul cover _mocha",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "test": "mocha",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -15,33 +15,31 @@
     "chai",
     "chai-plugin",
     "objects",
-    "subset",
-    "contains",
-    "plugin",
-    "containSubset"
+    "graphql",
+    "graphql-response",
+    "plugin"
   ],
-  "author": "Andrii Shumada <eagleeyes91@gmail.com>",
-  "contributors": [
-    "Robert Herhold <reherhold@gmail.com>"
-  ],
+  "author": "Francis Gulotta <wizard@roborooter.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/debitoor/chai-subset/issues"
+    "url": "https://github.com/bustlelabs/chai-graphql/issues"
   },
-  "homepage": "https://github.com/debitoor/chai-subset",
+  "homepage": "https://github.com/bustlelabs/chai-graphql",
   "devDependencies": {
     "chai": "3.5.0",
-    "coveralls": "2.11.15",
-    "istanbul": "0.4.5",
-    "jscs": "3.0.7",
-    "mocha": "3.2.0",
-    "mocha-eslint": "3.0.1",
-    "mocha-jscs": "5.0.1"
+    "eslint": "^3.16.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.2",
+    "eslint-plugin-standard": "^2.0.1",
+    "mocha": "^3.2.0"
   },
   "files": [
     "lib"
   ],
   "engines": {
     "node": ">=4"
+  },
+  "dependencies": {
+    "check-error": "^1.0.2"
   }
 }
