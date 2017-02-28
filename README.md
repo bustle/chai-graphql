@@ -4,6 +4,8 @@ chai-graphql
 [![devDependency Status](https://david-dm.org/bustlelabs/chai-graphql/dev-status.svg)](https://david-dm.org/bustlelabs/chai-graphql#info=devDependencies)
 ===========
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bustlelabs/chai-graphql.svg)](https://greenkeeper.io/)
+
 GraphQL response matcher for Chai [Chai](http://chaijs.com/) assertion library
 
 Works with both parsed JSON responses and local object responses.
