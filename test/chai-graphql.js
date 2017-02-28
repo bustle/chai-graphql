@@ -29,6 +29,15 @@ describe('graphQL', () => {
   })
 })
 
+describe('graphQLError', () => {
+  it('matches on errors', () => {
+    assert.graphQLError(badResponse)
+  })
+  it('failes with no errors', () => {
+    assert.throws(() => assert.graphQLError(response))
+  })
+})
+
 // describe('bad response', () => {
 //   it('should match the data', () => {
 //     assert.graphQLError(badResponse)
