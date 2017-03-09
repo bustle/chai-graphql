@@ -11,8 +11,8 @@ npm install --save-dev chai-graphql
 ```
 
 ## API
-- `assert.graphQl(response, expectedData)` performs a deep equals on the `response.data`, throws if there are `response.errors`
-- `assert.graphQLError(response)` throws if there are not `response.errors`
+- `assert.graphQl(response, [expectedData])` performs a deep equals on the `response.data`, throws if there are `response.errors`, returns the data
+- `assert.graphQLError(response)` throws if there are not `response.errors`, returns the errors
 
 ## Usage
 In your setup
@@ -24,20 +24,21 @@ chai.use(chaiGraphQL)
 
 in your spec.js
 ```js
-var request = {
+var goodResponse = {
   data: {
     foo: 'bar'
   }
 }
 
 // Passes
-assert.graphQL(request, { foo: 'bar' })
-assert.notGraphQLError(request)
-expect(request).to.be.graphQl({ foo: 'bar' })
+assert.graphQL(goodResponse, { foo: 'bar' })
+assert.graphQL(goodResponse)
+assert.notGraphQLError(goodResponse)
+expect(goodResponse).to.be.graphQl({ foo: 'bar' })
 
 // Fails
-assert.graphQLError(request)
-expect(request).to.be.graphQLError()
+assert.graphQLError(goodResponse)
+expect(goodResponse).to.be.graphQLError()
 
 const badResponse = {
   errors: [
@@ -56,6 +57,7 @@ expect(badResponse).to.be.graphQLError()
 
 // fails
 assert.graphQL(badResponse, { foo: 'bar' })
+assert.graphQL(badResponse)
 assert.notGraphQLError(badResponse)
 expect(badResponse).to.be.graphQl({ foo: 'bar' })
 ```

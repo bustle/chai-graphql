@@ -15,36 +15,50 @@ const badResponse = Object.freeze({
 })
 
 describe('graphQL', () => {
-  it('should match the data', () => {
+  it('matches the data', () => {
     assert.graphQL(response, { foo: 'bar' })
   })
 
-  it(`should fail if the data doesn't match`, () => {
+  it('returns the data', () => {
+    assert.deepEqual(assert.graphQL(response), { foo: 'bar' })
+  })
+
+  it(`fails if the data doesn't match`, () => {
     assert.throws(() => assert.graphQL(response, {}))
     assert.throws(() => assert.graphQL({}, {}))
   })
 
-  it('should fail if there are errors', () => {
+  it('fails if there are errors', () => {
     assert.throws(() => assert.graphQL(badResponse, { foo: 'bar' }))
+  })
+
+  it('allows no matched data', () => {
+    assert.graphQL(response)
+  })
+
+  it('fails if there is an error an no matched data', () => {
+    assert.throws(() => assert.graphQL(badResponse))
   })
 })
 
 describe('notGraphQLError', () => {
-  it('should pass if there are no errors', () => {
+  it('passes if there are no errors', () => {
     assert.notGraphQLError(response)
   })
 
-  it('should fail if there are errors', () => {
+  it('fails if there are errors', () => {
     assert.throws(() => assert.notGraphQLError(badResponse))
   })
 })
-
 
 describe('graphQLError', () => {
   it('matches on errors', () => {
     assert.graphQLError(badResponse)
   })
-  it('failes with no errors', () => {
+  it('fails with no errors', () => {
     assert.throws(() => assert.graphQLError(response))
+  })
+  it('returns the errors', () => {
+    assert.deepEqual(assert.graphQLError(badResponse), badResponse.errors)
   })
 })
