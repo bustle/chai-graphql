@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/debitoor/chai-subset.git"
+    "url": "https://github.com/bustlelabs/chai-graphql"
   },
   "keywords": [
     "chai",
