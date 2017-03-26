@@ -39,6 +39,14 @@ describe('graphQL', () => {
   it('fails if there is an error an no matched data', () => {
     assert.throws(() => assert.graphQL(badResponse))
   })
+
+  it('fails if there is no data', () => {
+    assert.throws(() => assert.graphQL({}))
+  })
+
+  it('fails if there is null data', () => {
+    assert.throws(() => assert.graphQL({ data: null }))
+  })
 })
 
 describe('notGraphQLError', () => {
