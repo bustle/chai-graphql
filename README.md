@@ -11,8 +11,8 @@ npm install --save-dev chai-graphql
 ```
 
 ## API
-- `assert.graphQl(response, [expectedData])` performs a deep equals on the `response.data`, throws if there are `response.errors`, returns the data
-- `assert.graphQLError(response)` throws if there are not `response.errors`, returns the errors
+- `assert.graphQl(response, [expectedData])` performs a deep equals on the `response.data` and expectedData if present. Throws if there are any errors in `response.errors`. Returns `respose.data`
+- `assert.graphQLError(response)` throws if there are not any `response.errors`, returns the `response.errors`
 
 ## Usage
 In your setup
