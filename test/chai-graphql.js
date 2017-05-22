@@ -155,6 +155,13 @@ describe('graphQLError', () => {
     ]))
   })
 
+  it('fails if there was a weird matcher', () => {
+    assert.throws(() => assert.graphQLError(badResponse, [
+      { message: 'blah balh' },
+      { message: 'blah balh' }
+    ]))
+  })
+
   it('fails if an array of messages are out of order', () => {
     assert.throws(() => {
       assert.graphQLError(badResponse, [
