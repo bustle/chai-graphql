@@ -5,7 +5,7 @@
   "main": "lib/chai-graphql.js",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint"
+    "lint": "eslint **/*.js"
   },
   "repository": {
     "type": "git",

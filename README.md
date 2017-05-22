@@ -11,8 +11,9 @@ npm install --save-dev chai-graphql
 ```
 
 ## API
-- `assert.graphQl(response, [expectedData])` performs a deep equals on the `response.data` and expectedData if present. Throws if there are any errors in `response.errors`. Returns `respose.data`
-- `assert.graphQLError(response)` throws if there are not any `response.errors`, returns the `response.errors`
+- `assert.graphQl(response, [expectedData])` performs a deep equals on the `response.data` and expectedData if present. Throws if there are any errors in `response.errors`. Returns `response.data`
+- `assert.graphQLSubset(response, [subsetOfExpectedData])` performs a subset match of `response.data` and expectedData if present. Throws if there are any errors in `response.errors`. Returns `response.data`
+- `assert.graphQLError(response, [errorMatcher])` throws if there are not any `response.errors`, returns the `response.errors`. `errorMatcher` can be a string, regex or an array of strings or regexes. In the string or regex form the error's message property will be [`match()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) by the `errorMatcher`. In the array form, each `errorMatcher` is tested against each error in order. If there a greater or fewer number of matchers than errors an it will throw.
 
 ## Usage
 In your setup
@@ -32,11 +33,16 @@ var goodResponse = {
 
 // Passes
 assert.graphQL(goodResponse, { foo: 'bar' })
+assert.graphQLSubset(goodResponse, { foo: 'bar' })
 assert.graphQL(goodResponse)
+assert.graphQLSubset(goodResponse)
+assert.graphQLSubset(goodResponse, { })
 assert.notGraphQLError(goodResponse)
 expect(goodResponse).to.be.graphQl({ foo: 'bar' })
 
 // Fails
+assert.graphQL(goodResponse, { foo: 'FAIL' })
+assert.graphQL(goodResponse, { })
 assert.graphQLError(goodResponse)
 expect(goodResponse).to.be.graphQLError()
 
@@ -55,9 +61,18 @@ const badResponse = {
 assert.graphQLError(badResponse)
 expect(badResponse).to.be.graphQLError()
 
+assert.graphQLError(badResponse, 'Error message')
+assert.graphQLError(badResponse, /GraphQL Error Object/)
+assert.graphQLError(badResponse, [
+  'Error message',
+  /GraphQL Error Object/
+])
+
 // fails
 assert.graphQL(badResponse, { foo: 'bar' })
 assert.graphQL(badResponse)
 assert.notGraphQLError(badResponse)
 expect(badResponse).to.be.graphQl({ foo: 'bar' })
+assert.graphQLError(badResponse, 'Rando Error')
+assert.graphQLError(badResponse, [ 'Error message' ])
 ```
