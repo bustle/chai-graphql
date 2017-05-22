@@ -1,6 +1,6 @@
 {
   "name": "chai-graphql",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "GraphQL response matcher for Chai",
   "main": "lib/chai-graphql.js",
   "scripts": {
