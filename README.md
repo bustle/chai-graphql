@@ -1,4 +1,4 @@
-chai-graphql [![npm version](https://badge.fury.io/js/chai-graphql.svg)](https://badge.fury.io/js/chai-graphql) [![Build Status](https://travis-ci.org/bustlelabs/chai-graphql.svg?branch=master)](https://travis-ci.org/bustlelabs/chai-graphql) [![devDependency Status](https://david-dm.org/bustlelabs/chai-graphql/dev-status.svg)](https://david-dm.org/bustlelabs/chai-graphql#info=devDependencies)
+chai-graphql [![npm version](https://badge.fury.io/js/chai-graphql.svg)](https://badge.fury.io/js/chai-graphql) [![Build Status](https://travis-ci.org/bustle/chai-graphql.svg?branch=master)](https://travis-ci.org/bustle/chai-graphql) [![devDependency Status](https://david-dm.org/bustle/chai-graphql/dev-status.svg)](https://david-dm.org/bustle/chai-graphql#info=devDependencies)
 ===========
 
 GraphQL response matcher for [Chai](http://chaijs.com/) assertion library
