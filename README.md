@@ -11,8 +11,11 @@ npm install --save-dev chai-graphql
 ```
 
 ## API
-- `assert.graphQl(response, [expectedData])` performs a deep equals on the `response.data` and expectedData if present. Throws if there are any errors in `response.errors`. Returns `response.data`
-- `assert.graphQLSubset(response, [subsetOfExpectedData])` performs a subset match of `response.data` and expectedData if present. Throws if there are any errors in `response.errors`. Returns `response.data`
+
+Methods will "unwrap" the data and/or payload from a response to make testing less repetitive.
+
+- `assert.graphQl(response, [expectedData])` performs a deep equals on the `response.data` or `response.data.payload` and `expectedData` if present. Throws if there are any errors in `response.errors`. Returns `response.data`
+- `assert.graphQLSubset(response, [subsetOfExpectedData])` performs a subset match of `response.data` or `response.data.payload` and expectedData if present. Throws if there are any errors in `response.errors`. Returns `response.data`
 - `assert.graphQLError(response, [errorMatcher])` throws if there are not any `response.errors`, returns the `response.errors`. `errorMatcher` can be a string, regex or an array of strings or regexes. In the string or regex form the error's message property will be [`match()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) by the `errorMatcher`. In the array form, each `errorMatcher` is tested against each error in order. If there a greater or fewer number of matchers than errors an it will throw.
 
 ## Usage

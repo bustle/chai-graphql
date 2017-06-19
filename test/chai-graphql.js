@@ -21,6 +21,14 @@ const badResponse = Object.freeze({
   ]
 })
 
+const mutationResponse = Object.freeze({
+  data: Object.freeze({
+    payload: Object.freeze({
+      foo: 'bar'
+    })
+  })
+})
+
 describe('graphQL', () => {
   it('matches the data', () => {
     assert.graphQL(response, { foo: 'bar' })
@@ -53,6 +61,14 @@ describe('graphQL', () => {
 
   it('fails if there is null data', () => {
     assert.throws(() => assert.graphQL({ data: null }))
+  })
+
+  it('returns the payload', () => {
+    assert.deepEqual(assert.graphQL(mutationResponse), mutationResponse.data.payload)
+  })
+
+  it('matches against a payload if present', () => {
+    assert.graphQL(mutationResponse, mutationResponse.data.payload)
   })
 })
 
@@ -101,6 +117,14 @@ describe('graphQLSubset', () => {
 
   it('fails if there is null data', () => {
     assert.throws(() => assert.graphQLSubset({ data: null }))
+  })
+
+  it('returns the payload', () => {
+    assert.deepEqual(assert.graphQLSubset(mutationResponse), mutationResponse.data.payload)
+  })
+
+  it('matches against a payload if present', () => {
+    assert.graphQLSubset(mutationResponse, mutationResponse.data.payload)
   })
 })
 
